@@ -1,7 +1,5 @@
 package org.example.entity;
 
-import java.security.PrivilegedExceptionAction;
-
 public class Queue<T> {
 
     private Node<T> front, back;
@@ -14,7 +12,7 @@ public class Queue<T> {
     public void enqueue(T data){
         Node<T> newNode = new Node<>(data);
         if (back == null){
-            front = back;
+            front = newNode;
             back = newNode;
             return;
         }
@@ -23,18 +21,16 @@ public class Queue<T> {
         back = newNode;
     }
 
-    public T dequeue(){
+    public void dequeue(){
         if (front == null){
             throw new IllegalStateException("Queue is empty");
         }
 
-        T dataDequeue = back.data;
         front = front.next;
         if(front == null){
             back = null;
         }
 
-        return dataDequeue;
     }
 
     public T peek(){
